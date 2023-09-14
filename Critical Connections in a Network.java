@@ -36,6 +36,8 @@ class Solution {
             if(vis[v] == 0) {
                 dfs(adj, v, low, disc, vis, criticalConnection, u);
 
+                low[u] = Math.min(low[v], low[u]);
+                
                 if(low[v] > disc[u]) {
                     criticalConnection.add(Arrays.asList(u, v));
                 }
