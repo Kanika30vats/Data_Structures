@@ -48,7 +48,6 @@ class Solution
     int[] JobScheduling(Job arr[], int n)
     {
         // Your code here
-        int res[] = new int[2];
         int count = 0;
         int maxProfit = 0;
         int maxDeadline = Integer.MIN_VALUE;
@@ -76,9 +75,7 @@ class Solution
             }
         }
         
-        res[0] = count;
-        res[1] = maxProfit;
-        return res;
+        return new int[] {count, maxProfit};
     }
 }
 
