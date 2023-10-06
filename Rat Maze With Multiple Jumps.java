@@ -57,14 +57,17 @@ class Solution
             return true;
         }
         
-        int jumps = matrix[x][y];
-        
-        for(int i = 1; i <= jumps; i++) {
-            if(computeShortestDistance(x, y + i, resultantMatrix, n, matrix))
-                return true;
-            if(computeShortestDistance(x + i, y, resultantMatrix, n, matrix))
-                return true;
+        if(matrix[x][y] != 0) {
+            int jumps = matrix[x][y];
+            
+            for(int i = 1; i <= jumps; i++) {
+                if(computeShortestDistance(x, y + i, resultantMatrix, n, matrix))
+                    return true;
+                if(computeShortestDistance(x + i, y, resultantMatrix, n, matrix))
+                    return true;
+            }
         }
+        
         resultantMatrix[x][y] = 0;
         return false;
     }
