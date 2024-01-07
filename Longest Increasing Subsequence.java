@@ -1,29 +1,29 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
-        int res = 1;
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(nums[0]);
-
-        for(int i = 1; i < nums.length; i++) {
-            if(nums[i] > list.get(list.size() - 1)) {
-                list.add(nums[i]);
-                res++;
+        int len = 0;
+        ArrayList<Integer> countOfLIS = new ArrayList<>();
+        for(int i = 0; i < nums.length; i++) {
+            if(i == 0 || nums[i] > countOfLIS.get(len-1)) {
+                countOfLIS.add(nums[i]);
+                len++;
             }
             else {
-                int ceilIndex = findCeilingIndex(list, nums[i], 0, list.size()-1);
-                list.set(ceilIndex, nums[i]);
+                int ceilIndex = findCeilIndex(countOfLIS, nums[i], 0, len-1);
+                countOfLIS.set(ceilIndex, nums[i]);
             }
         }
-        return res;
+        return len;
     }
 
-    private int findCeilingIndex(ArrayList<Integer> list, int num, int low, int high) {
+    private int findCeilIndex(ArrayList<Integer> countOfLIS, int n, int low, int high) {
         while(low < high) {
-            int mid = low + (high-low)/2;
-            if(num <= list.get(mid))
+            int mid = low + (high - low)/2;
+            if(countOfLIS.get(mid) >= n) {
                 high = mid;
-            else if(num > list.get(mid))
+            }
+            else {
                 low = mid + 1;
+            }
         }
         return high;
     }
